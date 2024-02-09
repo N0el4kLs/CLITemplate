@@ -1,4 +1,4 @@
-module my-cli-template
+module CLITemplate
 
 go 1.21.0
 
