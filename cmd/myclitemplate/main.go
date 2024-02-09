@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"CLITemplate/runner"
+	"github.com/N0el4kLs/CLITemplate/runner"
 
 	"github.com/projectdiscovery/gologger"
 )

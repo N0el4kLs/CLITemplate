@@ -1,4 +1,4 @@
-module CLITemplate
+module github.com/N0el4kLs/CLITemplate
 
 go 1.21.0
 
