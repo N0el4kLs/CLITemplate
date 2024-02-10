@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"github.com/N0el4kLs/CLITemplate/pkg/template"
 	"github.com/projectdiscovery/gologger"
 )
 
@@ -22,6 +23,11 @@ func NewRunner(option *Options) (*Runner, error) {
 	runner := &Runner{}
 	runner.options = option
 
+	template.TemplateInstance = &template.Template{
+		ProjectName: option.ProjectName,
+		GoModName:   option.GoModName,
+	}
+
 	return runner, nil
 }
 
@@ -35,20 +41,35 @@ func (r *Runner) Run() error {
 	createGoMod(r.options.GoModName)
 
 	gologger.Info().Msgf("Fill template...\n")
-	fillTemplate("Makefile", MakefileTemplate, r.options.ProjectName, r.options.ProjectName)
 
-	fillTemplate("README.md", ReadmeTemplate, r.options.ProjectName)
+	// 3. fill template
+	for _, tplName := range template.Templates {
+		execTemplate(tplName, WorkDir)
+	}
+	//execTemplate(template.MAKEFILE_TEMPLATE, WorkDir)
+	//fillTemplate("Makefile", MakefileTemplate, r.options.ProjectName, r.options.ProjectName)
+	//
+	//execTemplate(template.README_TEMPLATE, WorkDir)
+	//fillTemplate("README.md", ReadmeTemplate, r.options.ProjectName)
+	//
+	//execTemplate(template.IGNORE_TEMPLATE, WorkDir)
+	//fillTemplate(".gitignore", IgnoreTemplate)
+	//
 
-	fillTemplate(".gitignore", IgnoreTemplate, "")
+	//execTemplate(template.BANNER_TEMPLATE, WorkDir)
+	//fillTemplate("runner/banner.go", BannerTemplate)
+	//
+	//execTemplate(template.OPTION_TEMPLATE, WorkDir)
+	//fillTemplate("runner/option.go", OptionTemplate)
+	//
+	//execTemplate(template.RUNNER_TEMPLATE, WorkDir)
+	//fillTemplate("runner/runner.go", RunnerTemplate)
+	//
+	//execTemplate(template.MAIN_TEMPLATE, WorkDir)
+	//fillTemplate(fmt.Sprintf("cmd/%s/main.go", r.options.ProjectName), MainTemplate, r.options.GoModName)
+	//
 
-	fillTemplate("runner/banner.go", BannerTemplate, "")
-
-	fillTemplate("runner/option.go", OptionTemplate, "")
-
-	fillTemplate("runner/runner.go", RunnerTemplate, "")
-
-	fillTemplate(fmt.Sprintf("cmd/%s/main.go", r.options.ProjectName), MainTemplate, r.options.GoModName)
-
+	// 4. install dependences
 	installDependences()
 	return nil
 }
@@ -104,6 +125,7 @@ func createDirectoryStruct(pjName string) {
 	gologger.Info().Msgf("Create directories struct done!\n")
 }
 
+// will be deprecated in the next version
 func fillTemplate(tmpName, tmpContent string, tmpValue ...string) {
 	gologger.Info().Msgf("Fill %s...\n", tmpName)
 	if len(tmpValue) > 0 {
@@ -118,6 +140,10 @@ func fillTemplate(tmpName, tmpContent string, tmpValue ...string) {
 		gologger.Error().Msgf("Failed to write %s: %s\n", tmpName, err)
 		err = nil
 	}
+}
+
+func execTemplate(tplName, workDir string) {
+	template.Render(tplName, workDir)
 }
 
 func installDependences() {
@@ -141,9 +167,12 @@ func installDependences() {
 	if err := c.Run(); err != nil {
 		gologger.Error().Msgf("Go mod tidy error: %s\n", err)
 	}
-	gologger.Info().Msgf("Install dependences done!\n")
+	gologger.Info().Msgf("Install dependencies done!\n")
 
 	// format the go code
 	gologger.Info().Msgf("Format the go code...\n")
-	exec.Command("go", "fmt", WorkDir).Run()
+	if err := exec.Command("go", "fmt", WorkDir).Run(); err != nil {
+		gologger.Error().Msgf("Format the go code error: %s\n", err)
+	}
+	gologger.Info().Msgf("Format the go code done!\n")
 }

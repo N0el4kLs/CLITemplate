@@ -1,5 +1,6 @@
 package runner
 
+// will be replaced by the template in next version
 var (
 	MakefileTemplate string = `# Go parameters
 GOCMD=go
