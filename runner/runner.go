@@ -42,28 +42,34 @@ func (r *Runner) Run() error {
 
 	gologger.Info().Msgf("Fill template...\n")
 
-	execTemplate(template.MAKEFILE_TEMPLATE, WorkDir)
+	// 3. fill template
+	for _, tplName := range template.Templates {
+		execTemplate(tplName, WorkDir)
+	}
+	//execTemplate(template.MAKEFILE_TEMPLATE, WorkDir)
 	//fillTemplate("Makefile", MakefileTemplate, r.options.ProjectName, r.options.ProjectName)
 	//
-	execTemplate(template.README_TEMPLATE, WorkDir)
+	//execTemplate(template.README_TEMPLATE, WorkDir)
 	//fillTemplate("README.md", ReadmeTemplate, r.options.ProjectName)
 	//
-	execTemplate(template.IGNORE_TEMPLATE, WorkDir)
+	//execTemplate(template.IGNORE_TEMPLATE, WorkDir)
 	//fillTemplate(".gitignore", IgnoreTemplate)
 	//
 
-	execTemplate(template.BANNER_TEMPLATE, WorkDir)
+	//execTemplate(template.BANNER_TEMPLATE, WorkDir)
 	//fillTemplate("runner/banner.go", BannerTemplate)
 	//
-	execTemplate(template.OPTION_TEMPLATE, WorkDir)
+	//execTemplate(template.OPTION_TEMPLATE, WorkDir)
 	//fillTemplate("runner/option.go", OptionTemplate)
 	//
-	execTemplate(template.RUNNER_TEMPLATE, WorkDir)
+	//execTemplate(template.RUNNER_TEMPLATE, WorkDir)
 	//fillTemplate("runner/runner.go", RunnerTemplate)
 	//
-	execTemplate(template.MAIN_TEMPLATE, WorkDir)
+	//execTemplate(template.MAIN_TEMPLATE, WorkDir)
 	//fillTemplate(fmt.Sprintf("cmd/%s/main.go", r.options.ProjectName), MainTemplate, r.options.GoModName)
 	//
+
+	// 4. install dependences
 	installDependences()
 	return nil
 }
@@ -161,9 +167,12 @@ func installDependences() {
 	if err := c.Run(); err != nil {
 		gologger.Error().Msgf("Go mod tidy error: %s\n", err)
 	}
-	gologger.Info().Msgf("Install dependences done!\n")
+	gologger.Info().Msgf("Install dependencies done!\n")
 
 	// format the go code
 	gologger.Info().Msgf("Format the go code...\n")
-	exec.Command("go", "fmt", WorkDir).Run()
+	if err := exec.Command("go", "fmt", WorkDir).Run(); err != nil {
+		gologger.Error().Msgf("Format the go code error: %s\n", err)
+	}
+	gologger.Info().Msgf("Format the go code done!\n")
 }
