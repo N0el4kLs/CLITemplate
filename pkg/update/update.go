@@ -15,10 +15,12 @@ import (
 	"github.com/projectdiscovery/gologger"
 )
 
+// References:
 // https://github.com/minio/selfupdate
 // https://github.com/Ciyfly/Argo/blob/main/pkg/updateself/update.go
 var (
 	ZIP                    = "zip"
+	PROJECT_NAME           = "CLITemplate"
 	REPOSITORY_RELEASE_API = "https://api.github.com/repos/N0el4kLs/CLITemplate/releases/latest"
 )
 
@@ -43,12 +45,16 @@ func Update(crtVersion string) {
 	if crtVersion < remoteLatest.TagName {
 		gologger.Info().
 			Label("Update").
-			Msgf("Found new version, try to update to latest version %s...\n", remoteLatest.TagName)
+			Msgf("Found new version, try to update to latest version %s ...\n", remoteLatest.TagName)
 
 		// 3. download latest version
 		if err = remoteLatest.download(); err != nil {
 			gologger.Fatal().Msgf("Update to latest version error: %s\n", err)
 		}
+	} else {
+		gologger.Info().
+			Label("Update").
+			Msgf("Current version %s is the latest version \n", crtVersion)
 	}
 }
 
@@ -112,7 +118,7 @@ func (l LastVersionInfo) download() error {
 	if err = unzipFile(downloadedFileName); err != nil {
 		return err
 	}
-	bin, err := os.Open(downloadedFileName)
+	bin, err := os.Open(PROJECT_NAME)
 	if err != nil {
 		return err
 	}
@@ -127,7 +133,10 @@ func (l LastVersionInfo) download() error {
 		return err
 	}
 
-	// clean zip file
+	// clean cache
+	if err = cleanCache(downloadedFileName); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -188,7 +197,20 @@ func unzipFile(name string) error {
 				return fmt.Errorf("UncompressZip copy downloadedFile error: %w", err)
 			}
 
-			gologger.Info().Msgf("UncompressZip success: %s \n", filePath)
+			gologger.Debug().Msgf("UncompressZip success: %s \n", filePath)
+		}
+	}
+	return nil
+}
+
+func cleanCache(n string) error {
+	neededClean := []string{
+		n,
+		PROJECT_NAME,
+	}
+	for _, f := range neededClean {
+		if err := os.Remove(f); err != nil {
+			return err
 		}
 	}
 	return nil
