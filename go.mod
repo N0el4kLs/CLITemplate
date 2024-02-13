@@ -1,6 +1,6 @@
 module github.com/N0el4kLs/CLITemplate
 
-go 1.21.0
+go 1.21
 
 require (
 	github.com/minio/selfupdate v0.6.0
