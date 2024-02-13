@@ -40,34 +40,8 @@ func (r *Runner) Run() error {
 	// 2. create go mod
 	createGoMod(r.options.GoModName)
 
-	gologger.Info().Msgf("Fill template...\n")
-
 	// 3. fill template
-	for _, tplName := range template.Templates {
-		execTemplate(tplName, WorkDir)
-	}
-	//execTemplate(template.MAKEFILE_TEMPLATE, WorkDir)
-	//fillTemplate("Makefile", MakefileTemplate, r.options.ProjectName, r.options.ProjectName)
-	//
-	//execTemplate(template.README_TEMPLATE, WorkDir)
-	//fillTemplate("README.md", ReadmeTemplate, r.options.ProjectName)
-	//
-	//execTemplate(template.IGNORE_TEMPLATE, WorkDir)
-	//fillTemplate(".gitignore", IgnoreTemplate)
-	//
-
-	//execTemplate(template.BANNER_TEMPLATE, WorkDir)
-	//fillTemplate("runner/banner.go", BannerTemplate)
-	//
-	//execTemplate(template.OPTION_TEMPLATE, WorkDir)
-	//fillTemplate("runner/option.go", OptionTemplate)
-	//
-	//execTemplate(template.RUNNER_TEMPLATE, WorkDir)
-	//fillTemplate("runner/runner.go", RunnerTemplate)
-	//
-	//execTemplate(template.MAIN_TEMPLATE, WorkDir)
-	//fillTemplate(fmt.Sprintf("cmd/%s/main.go", r.options.ProjectName), MainTemplate, r.options.GoModName)
-	//
+	execTemplate(WorkDir)
 
 	// 4. install dependences
 	installDependences()
@@ -125,7 +99,7 @@ func createDirectoryStruct(pjName string) {
 	gologger.Info().Msgf("Create directories struct done!\n")
 }
 
-// will be deprecated in the next version
+// deprecated
 func fillTemplate(tmpName, tmpContent string, tmpValue ...string) {
 	gologger.Info().Msgf("Fill %s...\n", tmpName)
 	if len(tmpValue) > 0 {
@@ -142,8 +116,11 @@ func fillTemplate(tmpName, tmpContent string, tmpValue ...string) {
 	}
 }
 
-func execTemplate(tplName, workDir string) {
-	template.Render(tplName, workDir)
+func execTemplate(workDir string) {
+	gologger.Info().Msgf("Fill template...\n")
+	for _, tplName := range template.Templates {
+		template.Render(tplName, workDir)
+	}
 }
 
 func installDependences() {
