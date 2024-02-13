@@ -17,4 +17,4 @@ myclitemplate -project xxx -gomodname xxx
 ## Todo
 
 - [x] 参考 go-scaffold 用以完善
-- [ ] self-update 功能
+- [x] self-update 功能
