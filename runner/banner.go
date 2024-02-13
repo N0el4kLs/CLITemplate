@@ -2,7 +2,7 @@ package runner
 
 import "fmt"
 
-const version = "v1.1.2"
+const VERSION = "v0.2.0"
 
 func ShowBanner() {
 	//http://www.network-science.de/ascii/  smslant
@@ -14,5 +14,5 @@ func ShowBanner() {
 \____/\____/\____/   \/   \___|_| |_| |_| .__/|_|\__,_|\__\___|
 					|_|                %s
 `
-	fmt.Printf(banner, version)
+	fmt.Printf(banner, VERSION)
 }

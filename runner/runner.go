@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/N0el4kLs/CLITemplate/pkg/template"
+	"github.com/N0el4kLs/CLITemplate/pkg/update"
 	"github.com/projectdiscovery/gologger"
 )
 
@@ -32,6 +33,9 @@ func NewRunner(option *Options) (*Runner, error) {
 }
 
 func (r *Runner) Run() error {
+	// check update
+	update.Update(VERSION)
+
 	WorkDir = filepath.Join(BaseDir, r.options.ProjectName)
 
 	// 1. create directories struct
