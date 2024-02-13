@@ -43,8 +43,8 @@ func (r *Runner) Run() error {
 	// 3. fill template
 	execTemplate(WorkDir)
 
-	// 4. install dependences
-	installDependences()
+	// 4. install dependencies
+	installDependencies()
 	return nil
 }
 
@@ -99,23 +99,6 @@ func createDirectoryStruct(pjName string) {
 	gologger.Info().Msgf("Create directories struct done!\n")
 }
 
-// deprecated
-func fillTemplate(tmpName, tmpContent string, tmpValue ...string) {
-	gologger.Info().Msgf("Fill %s...\n", tmpName)
-	if len(tmpValue) > 0 {
-		tmpContent = fmt.Sprintf(tmpContent, tmpValue)
-	}
-	err := os.WriteFile(
-		filepath.Join(WorkDir, tmpName),
-		[]byte(tmpContent),
-		0777,
-	)
-	if err != nil {
-		gologger.Error().Msgf("Failed to write %s: %s\n", tmpName, err)
-		err = nil
-	}
-}
-
 func execTemplate(workDir string) {
 	gologger.Info().Msgf("Fill template...\n")
 	for _, tplName := range template.Templates {
@@ -123,7 +106,7 @@ func execTemplate(workDir string) {
 	}
 }
 
-func installDependences() {
+func installDependencies() {
 	gologger.Info().Msgf("Install dependences...\n")
 	dependences := []string{
 		"github.com/projectdiscovery/gologger",
