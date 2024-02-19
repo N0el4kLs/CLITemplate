@@ -51,6 +51,10 @@ func Update(crtVersion string) {
 		if err = remoteLatest.download(); err != nil {
 			gologger.Fatal().Msgf("Update to latest version error: %s\n", err)
 		}
+		gologger.Info().
+			Label("Update").
+			Msgf("Update to latest version %s success, restart it\n", remoteLatest.TagName)
+		os.Exit(0)
 	} else {
 		gologger.Info().
 			Label("Update").
