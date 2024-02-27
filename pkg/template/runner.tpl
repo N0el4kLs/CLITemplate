@@ -12,12 +12,9 @@ func NewRunner(option *Options) (*Runner, error) {
 	return runner, nil
 }
 
-func NewRunner() *Runner {
-	return &Runner{}
-}
+func (r *Runner) Run() error {
 
-func (r *Runner) Run() {
-
+    return nil
 }
 
 func (r *Runner) Close() {
