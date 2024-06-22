@@ -134,9 +134,9 @@ func installDependencies() {
 	gologger.Info().Msgf("Install dependencies done!\n")
 
 	// format the go code
-	gologger.Info().Msgf("Format the go code...\n")
-	if err := exec.Command("go", "fmt", WorkDir).Run(); err != nil {
-		gologger.Error().Msgf("Format the go code error: %s\n", err)
-	}
-	gologger.Info().Msgf("Format the go code done!\n")
+	//gologger.Info().Msgf("Format the go code...\n")
+	//if err := exec.Command("go", "fmt", WorkDir).Run(); err != nil {
+	//	gologger.Error().Msgf("Format the go code error: %s\n", err)
+	//}
+	//gologger.Info().Msgf("Format the go code done!\n")
 }
