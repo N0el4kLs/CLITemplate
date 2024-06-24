@@ -3,8 +3,8 @@ module github.com/N0el4kLs/CLITemplate
 go 1.21
 
 require (
-	github.com/minio/selfupdate v0.6.0
-	github.com/projectdiscovery/gologger v1.1.12
+	github.com/minio/selfupdate v0.6.1-0.20230907112617-f11e74f84ca7
+	github.com/projectdiscovery/gologger v1.1.13
 )
 
 require (
@@ -21,9 +21,10 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/nwaples/rardecode v1.1.3 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
+	github.com/projectdiscovery/utils v0.1.4 // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
-	golang.org/x/crypto v0.0.0-20211209193657-4570a0811e8b // indirect
-	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/crypto v0.21.0 // indirect
+	golang.org/x/sys v0.18.0 // indirect
 	gopkg.in/djherbis/times.v1 v1.3.0 // indirect
 )
