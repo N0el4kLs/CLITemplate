@@ -43,10 +43,10 @@ github.com/pierrec/lz4/v4 v4.1.21 h1:yOVMLb6qSIDP67pl/5F7RepeKYu/VmTyEXvuMI5d9mQ
 github.com/pierrec/lz4/v4 v4.1.21/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/projectdiscovery/gologger v1.1.30 h1:Qc3tYcDwl7nh0IVotctAeXurp12sf+PQ3zu00AmLUds=
-github.com/projectdiscovery/gologger v1.1.30/go.mod h1:XCNafm7f4TSOX8pgowmO4RQYNdL3qFFejPN/BBzxXPo=
-github.com/projectdiscovery/utils v0.2.16 h1:OAa7ED5KalTUQGLiJgA8zRJSeaxakBypbpVBoB+vRwg=
-github.com/projectdiscovery/utils v0.2.16/go.mod h1:+ayI8L6qbMu9kern41QcLRDbGV3+x5GYbBVHNKWQvjc=
+github.com/projectdiscovery/gologger v1.1.36 h1:tfLDRK500VRCB5xlrsYWSqzGEX4f8+6ss59Uqc0lpmo=
+github.com/projectdiscovery/gologger v1.1.36/go.mod h1:WCjNeKuytIv4zY/TcXe5xncT+DWre55gbvhA9r9v9TQ=
+github.com/projectdiscovery/utils v0.4.1 h1:DRAqVMuLuo5NJChzXVdSqsKfAY3eFf9N1NX3Blhb0yU=
+github.com/projectdiscovery/utils v0.4.1/go.mod h1:tV//VyD+4qZYn3s3XCS7xDbhW20qjUjV6CWDDHE2VfQ=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
